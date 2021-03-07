@@ -1,4 +1,3 @@
-setwd("C:/Users/Elens/Downloads")
 heart <- read.csv(file = 'heart.csv')
 
 dens <- density(heart$ï.¿age)

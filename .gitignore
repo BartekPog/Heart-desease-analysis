@@ -1,0 +1,5 @@
+.Rproj.*
+*.Rproj
+Projekt-EDA.pdf
+*.RData
+*.Rhistory

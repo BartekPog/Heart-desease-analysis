@@ -80,9 +80,6 @@ ggplot(data,aes(y=age, x=chol,group=sex)) +
 
 
 
-data$target
-
-table(data)
 
 
 # https://ggplot2.tidyverse.org/reference/ggsave.html

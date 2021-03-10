@@ -30,29 +30,52 @@ recode(data$restecg, `0`="normal", `1`="ST-T-abnormality", `2`=)
 
 # Boxplot
 # Age
-ggplot(data,aes(y=age)) +
+ggplot(dataClean,aes(y=age)) +
   geom_boxplot(fill="coral1")+
-  theme_light()
+  ggtitle("Wykres pudełkowy wieku") + 
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) +
+  labs(y="Wiek")
+  # theme_light()/
+  
 
 # Resting blood Pressure
 ggplot(data,aes(y=trestbps)) +
   geom_boxplot(fill="coral1")+
-  theme_light()
+  ggtitle("Wykres pudełkowy ci") + 
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) +
+  labs(y="Resting blood pressure")
 
 # Cholesterole
 ggplot(data,aes(y=chol)) +
   geom_boxplot(fill="coral1")+
-  theme_light()
+  ggtitle("Cholesterole level box and whiskers plot") + 
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) +
+  labs(y="Age")
 
 # thalach - maximum heart rate achieved
 ggplot(data,aes(y=thalach)) +
   geom_boxplot(fill="coral1")+
-  theme_light()
+  ggtitle("Max heart rate achieved box and whiskers plot") + 
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) +
+  labs(y="Max heart rate achieved")
+
 
 # oldpeak - ST depression induced by exercise relative to rest
 ggplot(data,aes(y=oldpeak)) +
   geom_boxplot(fill="coral1")+
-  theme_light()
+  ggtitle("ST depression induced by exercise relative to rest") + 
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) +
+  labs(y="ST depression")
 
 
 
@@ -77,13 +100,4 @@ ggplot(data,aes(y=age, x=chol,group=sex)) +
   theme_light() +
   facet_grid(. ~ sex)
 
-
-
-
-data$target
-
-table(data)
-
-
-# https://ggplot2.tidyverse.org/reference/ggsave.html
-
+ggsave()

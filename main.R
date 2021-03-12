@@ -16,4 +16,7 @@ dataClean <- cleanData(data)
 # Graph generation
 generateBoxAndWhiskers(dataClean)
 
+## 2D - density plots
+generate2DDensity(dataClean)
+
 # Hyphotheses testing

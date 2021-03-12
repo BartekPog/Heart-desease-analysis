@@ -103,7 +103,7 @@ generateDensityPlots <- function(data)
 
   ggplot(data,aes(x=oldpeak)) +
     geom_density(fill="steelblue")+
-    ggtitle("Wykres gêstoœci Wzglêdnego obni¿enia rejonu ST w w czasie aktywnoœci fizycznej") + 
+    ggtitle("Wykres gêstoœci wzglêdnego obni¿enia rejonu ST w w czasie aktywnoœci fizycznej") + 
     theme(axis.title.y=element_blank(),
           axis.text.y=element_blank(),
           axis.ticks.y=element_blank()) +

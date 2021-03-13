@@ -2,7 +2,7 @@ library(ggplot2)
 
 generateDensityPlots <- function(data)
 {
-  ggplot(dataClean,aes(x=age)) +
+  ggplot(data,aes(x=age)) +
     geom_density(fill="steelblue")+
     ggtitle("Wykres gêstoœci wieku") + 
     labs(x="Wiek", y="Gêstoœæ")

@@ -2,7 +2,7 @@ library("ggplot2")
 
 generateBarPlots <- function(data)
 {
-  len <- nrow(data)
+  len <- length(data)
   
   # Wiek
   ggplot(data, aes(x=age, y=len)) +

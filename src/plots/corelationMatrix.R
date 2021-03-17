@@ -1,10 +1,9 @@
 library(corrplot)
-library("ggpubr")
+library(ggpubr)
 
-corelationMatrix <- function(inputData) {
-  
+generatecorrelationMatrix <- function(inputData) {
   pearsonCor<-cor(inputData)
   round(pearsonCor,2)
-  
   corrplot(pearsonCor, method="number", type="lower")
+  ggsave("images/correlationPlot.png")
 }

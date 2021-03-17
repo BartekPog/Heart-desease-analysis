@@ -1,6 +1,5 @@
-library(tidyverse) # includes many useful data analysis tools
+library(tidyverse)
 library(ggplot2)
-
 
 generate2DDensity <- function(data){
 

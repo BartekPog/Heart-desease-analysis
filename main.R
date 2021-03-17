@@ -3,11 +3,17 @@ library(ggplot2)
 library(GGally)
 
 source("src/data-cleaning.R")
+source("src/plots/BarPlots.R")
+source("src/plots/DensityPlots.R")
 source("src/plots/box-and-whiskers.R")
 source("src/plots/Scatterplot-Matrix.R")
 source("src/plots/2D-density.R")
-source("src/plots/BarPlots.R")
-source("src/plots/DensityPlots.R")
+source("src/plots/corelationMatrix.R")
+source("src/plots/corelationPlot.R")
+
+# install packages:
+## source("src/install-packages.R")
+## installPackages()
 
 DATA_FILE <- "data/heart.csv"
 
@@ -17,20 +23,30 @@ data <- read.csv(DATA_FILE)
 
 # Data cleaning
 dataClean <- cleanData(data)
-
-# Density Plots
-generateDensityPlots(dataClean)
+## Required for Correlation Plots (text data returns errors)
+dataRClean <- roughlyCleanData(data)
 
 # Graph generation
+
+## Barplots generation
+generateBarPlots(dataClean)
+
+## Density Plots
+generateDensityPlots(dataClean)
+
+## Box and whisker plots
 generateBoxAndWhiskers(dataClean)
+
+## Scatterplot Matrix generation
+generateScatterPlot(dataClean)
 
 ## 2D - density plots
 generate2DDensity(dataClean)
 
-#Scatterplot Matrix generation
-generateScatterPlot(dataClean)
+## Correlation Matrix
+generatecorrelationMatrix(dataRClean)
 
-# Barplots generation
-generateBarPlots(dataClean)
+## Correlation Plot
+generateCorrelationPlots(dataRClean)
 
 # Hyphotheses testing

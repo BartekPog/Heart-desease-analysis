@@ -9,8 +9,7 @@ source("src/plots/2D-density.R")
 source("src/plots/BarPlots.R")
 source("src/plots/DensityPlots.R")
 
-DATA_FILE <- "data/heart.csv"
-
+DATA_FILE <- "data/processed.cleveland.data"
 
 # Data import
 data <- read.csv(DATA_FILE)
@@ -32,5 +31,8 @@ generateScatterPlot(dataClean)
 
 # Barplots generation
 generateBarPlots(dataClean)
+
+# Boxplots generation
+generateBoxPlots(dataClean)
 
 # Hyphotheses testing

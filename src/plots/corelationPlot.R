@@ -1,11 +1,23 @@
 library(corrplot)
-library("ggpubr")
+library(ggpubr)
 
-generateCorrelationPlot <- function(inputData1, inputData2, label1, label2) {
+#Single plot generation
+generateCorrelationPlot <- function(dataframe,inputData1, inputData2, labelx=inputData1, labely=inputData2) {
   
-  ggscatter(data, x = inputData1, y = inputData2,
+  ggscatter(dataframe, x = inputData1, y = inputData2,
             add = "reg.line", conf.int = TRUE, 
             cor.coef = TRUE, cor.method = "pearson",
-            xlab = label1, ylab = label2)
+            xlab = labelx, ylab = labely)
+  ggsave(paste("images/correlation",inputData1,inputData2,".png", sep="-"))
+}
+
+generateCorrelationPlots <- function(dataframe) {
   
+  generateCorrelationPlot(dataframe, "age", "thalach")
+  
+  generateCorrelationPlot(dataframe, "exang", "cp")
+  
+  generateCorrelationPlot(dataframe, "cp", "thalach")
+  
+  generateCorrelationPlot(dataframe, "slope", "oldpeak")
 }

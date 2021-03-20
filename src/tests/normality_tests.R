@@ -6,4 +6,5 @@ NormalityTests <- function(data)
   shapiro.test(data$trestbps)
   shapiro.test(data$thalach)
   sink()
+  unlink("tests/Shapiro-Wilk-normality-tests.txt")
 }

@@ -10,6 +10,7 @@ source("src/plots/Scatterplot-Matrix.R")
 source("src/plots/2D-density.R")
 source("src/plots/corelationMatrix.R")
 source("src/plots/corelationPlot.R")
+source("src/tests/normality_tests.R")
 
 # install packages:
 ## source("src/install-packages.R")
@@ -50,3 +51,4 @@ generatecorrelationMatrix(dataRClean)
 generateCorrelationPlots(dataRClean)
 
 # Hyphotheses testing
+NormalityTests(dataClean)

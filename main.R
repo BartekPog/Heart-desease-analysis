@@ -10,6 +10,7 @@ source("src/plots/Scatterplot-Matrix.R")
 source("src/plots/2D-density.R")
 source("src/plots/corelationMatrix.R")
 source("src/plots/corelationPlot.R")
+source("src/plots/Boxplots.R")
 source("src/tests/normality_tests.R")
 
 # install packages:
@@ -24,7 +25,7 @@ data <- read.csv(DATA_FILE)
 # Data cleaning
 dataClean <- cleanData(data)
 ## Required for Correlation Plots (text data returns errors)
-dataRClean <- roughlyCleanData(data)
+#dataRClean <- roughlyCleanData(data)
 
 # Graph generation
 

@@ -27,28 +27,28 @@ generateBarPlots <- function(data)
     ggtitle("Wykres zależności liczby badanych osób od typu bólu w klatce piersiowej") + 
     labs(x="Typ bólu w klatce piersiowej", y="Liczba badanych")
   
-  # Ciśnienie krwi
+  # Ciśnienie spoczynkowe krwi
   ggplot(data, aes(x=trestbps, y=len)) +
     geom_bar(stat = "identity", width=0.8, fill=rgb(0.1,0.4,0.5,0.7)) +
     geom_text(aes(label=trestbps), vjust=2.8, color="black", size=2.5) + 
     theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od ich ciśnienia krwi") + 
-    labs(x="Ciśnienie krwi", y="Liczba badanych")
+    ggtitle("Wykres zależności liczby badanych osób od ich ciśnienia spoczynkowego krwi") +
+    labs(x="Ciśnienie spoczynkowe krwi", y="Liczba badanych")
   
   # Cholesterol
   ggplot(data, aes(x=chol, y=len)) +
     geom_bar(stat = "identity", width=1.5, fill=rgb(0.1,0.4,0.5,0.7)) +
     theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od ich poziomu cholesterolu") + 
-    labs(x="Poziom cholesterolu", y="Liczba badanych")
+    ggtitle("Wykres zależności liczby badanych osób od ich stężenia cholesterolu") +
+    labs(x="Stężenie cholesterolu", y="Liczba badanych")
   
-  # Poziom cukru we krwi
+  # Poziom cukru we krwi na czczo
   ggplot(data, aes(x=fbs, y=len)) +
     geom_bar(stat = "identity", width=0.6, fill=rgb(0.1,0.4,0.5,0.7)) +
     geom_text(aes(label=fbs), vjust=1.5, color="black", size=3.0) + 
     theme_minimal() +
     ggtitle("Wykres zależności liczby badanych osób od ich poziomu cukru we krwi na czczo") + 
-    labs(x="Poziom cukru we krwi na czczo 120 mg/dL (1 = wykryto, 0 = nie wykryto)", y="Liczba badanych")
+    labs(x="Poziom cukru we krwi na czczo przekraczający 120 mg/dL (1 = Tak, 0 = Nie)", y="Liczba badanych")
   
   # Test EKG
   ggplot(data, aes(x=restecg, y=len)) +
@@ -72,7 +72,7 @@ generateBarPlots <- function(data)
     geom_text(aes(label=exang), vjust=2.5, color="black", size=3.0) + 
     theme_minimal() +
     ggtitle("Wykres zależności liczby badanych osób od wykrytej dławicy wysiłkowej") + 
-    labs(x="Wykrycie dławicy wysiłkowej (1 = wykryto, 0 = nie wykryto)", y="Liczba badanych")
+    labs(x="Wykrycie dławicy wysiłkowej (1 = Tak, 0 = Nie)", y="Liczba badanych")
   
   # Względne obniżenie rejonu ST w w czasie aktywności fizycznej
   ggplot(data, aes(x=oldpeak, y=len)) +
@@ -110,7 +110,7 @@ generateBarPlots <- function(data)
     geom_text(aes(label=target), vjust=2.5, color="black", size=3.0) +
     theme_minimal() +
     ggtitle("Wykres zależności liczby badanych osób od występowania choroby serca") + 
-    labs(x="1 = obecność choroby serca, 0 = brak obecności choroby serca", y="Liczba badanych")
+    labs(x="Występowanie choroby serca", y="Liczba badanych")
   
   return()
 }

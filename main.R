@@ -16,8 +16,7 @@ source("src/tests/normality_tests.R")
 ## source("src/install-packages.R")
 ## installPackages()
 
-DATA_FILE <- "data/heart.csv"
-
+DATA_FILE <- "data/processed.cleveland.data"
 
 # Data import
 data <- read.csv(DATA_FILE)
@@ -49,6 +48,9 @@ generatecorrelationMatrix(dataRClean)
 
 ## Correlation Plot
 generateCorrelationPlots(dataRClean)
+
+# Boxplots generation
+generateBoxPlots(dataClean)
 
 # Hyphotheses testing
 NormalityTests(dataClean)

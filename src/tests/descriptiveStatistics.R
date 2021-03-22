@@ -1,3 +1,5 @@
+library(moments)
+
 DescriptiveStatistics <- function(data)
 {
   #Obliczanie mediany

@@ -57,3 +57,6 @@ generateBoxPlots(dataClean)
 
 # Hyphotheses testing
 NormalityTests(dataClean)
+
+thalachTarget(dataClean)
+slopeOldpeak(dataClean)

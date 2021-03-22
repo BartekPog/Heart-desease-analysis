@@ -12,6 +12,7 @@ source("src/plots/corelationMatrix.R")
 source("src/plots/corelationPlot.R")
 source("src/plots/Boxplots.R")
 source("src/tests/normality_tests.R")
+source("src/tests/descriptiveStatistics.R")
 
 # install packages:
 ## source("src/install-packages.R")
@@ -55,3 +56,6 @@ generateBoxPlots(dataClean)
 
 # Hyphotheses testing
 NormalityTests(dataClean)
+
+# Descriptive Statistics
+DescriptiveStatistics(dataClean)

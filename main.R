@@ -12,6 +12,8 @@ source("src/plots/corelationMatrix.R")
 source("src/plots/corelationPlot.R")
 source("src/plots/Boxplots.R")
 source("src/tests/normality_tests.R")
+source("src/tests/slope-oldpeak.R")
+source("src/tests/thalach-target.R")
 
 # install packages:
 ## source("src/install-packages.R")

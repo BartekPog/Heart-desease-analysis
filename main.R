@@ -14,6 +14,8 @@ source("src/plots/Boxplots.R")
 source("src/tests/normality_tests.R")
 source("src/tests/slope-oldpeak.R")
 source("src/tests/thalach-target.R")
+source("src/tests/linearCorelation.R")
+source("src/tests/descriptiveStatistics.R")
 
 # install packages:
 ## source("src/install-packages.R")
@@ -61,4 +63,9 @@ NormalityTests(dataClean)
 thalachTarget(dataClean)
 
 slopeOldpeak(dataClean)
+
+linearCorelation (dataClean)
+
+# Descriptive Statistics
+DescriptiveStatistics(dataClean)
 

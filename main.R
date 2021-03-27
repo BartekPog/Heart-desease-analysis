@@ -55,8 +55,10 @@ generateCorrelationPlots(dataRClean)
 # Boxplots generation
 generateBoxPlots(dataClean)
 
-# Hyphotheses testing
+# Hypotheses testing
 NormalityTests(dataClean)
 
 thalachTarget(dataClean)
+
 slopeOldpeak(dataClean)
+

@@ -1,8 +1,11 @@
 library(ggplot2)
 
 slopeOldpeak <- function(data){
-  x <- as.numeric(dataClean$slope)
-  y <- as.numeric(dataClean$oldpeak)
+  
+  data <- data[data$oldpeak != 0,]
+  
+  x <- as.numeric(data$slope)
+  y <- as.numeric(data$oldpeak)
   
   cor.test(x, y, method="kendall", alternative="less")
   

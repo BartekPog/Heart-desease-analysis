@@ -12,6 +12,8 @@ source("src/plots/corelationMatrix.R")
 source("src/plots/corelationPlot.R")
 source("src/plots/Boxplots.R")
 source("src/tests/normality_tests.R")
+source("src/tests/slope-oldpeak.R")
+source("src/tests/thalach-target.R")
 source("src/tests/linearCorelation.R")
 source("src/tests/descriptiveStatistics.R")
 
@@ -55,10 +57,13 @@ generateCorrelationPlots(dataRClean)
 # Boxplots generation
 generateBoxPlots(dataClean)
 
-# Hyphotheses testing
+# Hypotheses testing
 NormalityTests(dataClean)
 
-# Hyphotheses testing
+thalachTarget(dataClean)
+
+slopeOldpeak(dataClean)
+
 linearCorelation (dataClean)
 
 # Descriptive Statistics

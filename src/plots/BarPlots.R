@@ -1,6 +1,6 @@
 library("ggplot2")
 
-generateBarPlots <- function(data)
+generateBarPlots <- function(dataClean)
 {
     # Wiek
       ggplot(dataClean, aes(age)) +

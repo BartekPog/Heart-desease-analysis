@@ -13,6 +13,7 @@ source("src/plots/corelationPlot.R")
 source("src/plots/Boxplots.R")
 source("src/plots/CountTables.R")
 source("src/tests/normality_tests.R")
+source("src/tests/chi-square-discrete.R")
 source("src/tests/slope-oldpeak.R")
 source("src/tests/thalach-target.R")
 source("src/tests/linearCorelation.R")
@@ -73,3 +74,5 @@ DescriptiveStatistics(dataClean)
 # Counts Tables generation
 generateTables(dataClean)
 
+# Chi-square test
+generateChiSqTest(dataClean)

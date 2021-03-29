@@ -68,8 +68,10 @@ cleanData <- function(data){
 roughlyCleanData <- function(data){
   
   # Data preparation
-  names(data)[1] <- "age"
+  #names(data)[1] <- "age"
+  data$ca <- as.numeric(data$ca)
   
+  data$thal <- as.numeric(data$thal)
   # missing values
   sapply(data, function(x) sum(is.na(x)))
   

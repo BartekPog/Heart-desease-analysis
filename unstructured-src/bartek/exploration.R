@@ -101,3 +101,10 @@ ggplot(data,aes(y=age, x=chol,group=sex)) +
   facet_grid(. ~ sex)
 
 ggsave()
+
+ggplot(data,aes(x=cp)) +
+  geom_histogram(fill="coral1")
+
+
+
+

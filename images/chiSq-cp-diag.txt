@@ -1,12 +1,9 @@
-
 	Pearson's Chi-squared test
 
 data:  data$cp and data$diag
 X-squared = 88.979, df = 12, p-value = 7.782e-14
 
-
 	Pearson's Chi-squared test with simulated p-value (based on 2000 replicates)
 
 data:  data$cp and data$diag
 X-squared = 88.979, df = NA, p-value = 0.0004998
-

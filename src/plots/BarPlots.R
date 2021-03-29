@@ -1,104 +1,101 @@
 library("ggplot2")
 
-generateBarPlots <- function(dataClean)
+generateBarPlots <- function(data)
 {
-    # Wiek
-      ggplot(dataClean, aes(age)) +
-        geom_bar(color="black", fill="white", width = 0.8)+
-        ggtitle("Wykres zależności liczby badanych osób od ich wieku")
-      
-      ggsave("images/BarPlots_age.png")
-      
-      # Płeć
-      ggplot(dataClean, aes(sex)) +
-        geom_bar(color="black", fill="white")+
-        ggtitle("Wykres zależności liczby badanych osób od ich płci")
-      
-      ggsave("images/BarPlots_sex.png")
-      
-      # Ból w klatce piersiowej
-      ggplot(dataClean, aes(cp)) +
-        geom_bar(color="black", fill="white")+
-        ggtitle("Wykres zależności liczby badanych osób od typu bólu w klatce piersiowej")
-      
-      ggsave("images/BarPlots_cp.png")
-      
-      # Ciśnienie spoczynkowe krwi
-      ggplot(dataClean, aes(trestbps)) +
-        geom_bar(color="black", fill="white", width = 0.8)+
-        ggtitle("Wykres zależności liczby badanych osób od ich ciśnienia spoczynkowego krwi")
-      
-      ggsave("images/BarPlots_trestbps.png")
-      
-      # Cholesterol
-      ggplot(dataClean, aes(chol)) +
-        geom_bar(color="black", fill="white")+
-        ggtitle("Wykres zależności liczby badanych osób od ich stężenia cholesterolu")
-      
-      ggsave("images/BarPlots_chol.png")
-      
-      # Poziom cukru we krwi na czczo
-      ggplot(dataClean, aes(fbs)) +
-        geom_bar(color="black", fill="white")+
-        ggtitle("Wykres zależności liczby badanych osób od wykrycia danego poziomu cukru")
-      
-      ggsave("images/BarPlots_fbs.png")
-      
-      # Test EKG
-      ggplot(dataClean, aes(restecg)) +
-        geom_bar(color="black", fill="white")+
-        ggtitle("Wykres zależności liczby badanych osób od wyniku testu EKG")
-      
-      ggsave("images/BarPlots_restecg.png")
-      
-      # Maksymalne tętno
-      ggplot(dataClean, aes(thalach)) +
-        geom_bar(color="black", fill="white", width = 0.7)+
-        ggtitle("Wykres zależności liczby badanych osób od wykrytego maksymalnego tętna")
-      
-      ggsave("images/BarPlots_thalach.png")
-      
-      # Dławica wysiłkowa
-      ggplot(dataClean, aes(exang)) +
-        geom_bar(color="black", fill="white")+
-        ggtitle("Wykres zależności liczby badanych osób od wykrytej dławicy wysiłkowej")
-        
-      ggsave("images/BarPlots_exang.png")
-      
-      # Względne obniżenie rejonu ST w w czasie aktywności fizycznej
-      ggplot(dataClean, aes(oldpeak)) +
-        geom_bar(color="black", fill="white", width = 0.08)+
-        ggtitle("Wykres zależności liczby badanych osób od segmentu ST")
-      
-      ggsave("images/BarPlots_oldpeak.png")
-      
-      # Nachylenie szczytowego odcinka ST wysiłkowego
-      ggplot(dataClean, aes(slope)) +
-        geom_bar(color="black", fill="white")+
-        ggtitle("Wykres zależności liczby badanych osób od nachylenia odcinka ST wysiłkowego")
-      
-      ggsave("images/BarPlots_slope.png")
-      
-      # Główne naczynia
-      ggplot(dataClean, aes(ca)) +
-        geom_bar(color="black", fill="white")+
-        ggtitle("Wykres zależności liczby badanych osób od liczby głównych naczyń")
-      
-      ggsave("images/BarPlots_ca.png")
-      
-      # Gęstość thalu
-      ggplot(dataClean, aes(thal)) +
-        geom_bar(color="black", fill="white")+
-        ggtitle("Wykres zależności liczby badanych osób od wyniku scyntygrafii")
-      
-      ggsave("images/BarPlots_thal.png")
-      
-      # Choroba serca
-      ggplot(dataClean, aes(target)) +
-        geom_bar(color="black", fill="white")+
-        ggtitle("Wykres zależności liczby badanych osób od występowania choroby serca")
-      
-      ggsave("images/BarPlots_target.png")
-    
-    return()
+  dataPrep <- data
+  
+  # Płeć
+  dataPrep$sex <- recode(dataClean$sex, "male"="mężczyzna", "female"="kobieta", .default="MISSING")
+  
+  ggplot(dataPrep, aes(x=sex)) +
+    geom_bar( width=0.8, fill="steelblue") +
+    theme_minimal() +
+    ggtitle("Wykres płci") + 
+    labs(x="Płeć", y="Liczba badanych")
+  
+  ggsave("images/barplot-sex.png")
+  
+  # Ból w klatce piersiowej
+  dataPrep$cp <- recode(dataClean$cp, "typical-angina"="typowy ból stenokardialny", "atypical-angina"="atypowy ból stenokardialny", "non-anginal-pain"="ból niedławicowy","asymptomatic"="brak bólu", .default="MISSING")
+  
+  ggplot(dataPrep, aes(x=cp)) +
+    geom_bar( width=0.8, fill="steelblue") +
+    theme_minimal() +
+    ggtitle("Źródło bólu w klatce piersiowej") + 
+    labs(x="Typ bólu w klatce piersiowej", y="Liczba badanych")
+  
+  ggsave("images/barplot-cp.png")
+  
+  # Poziom cukru we krwi na czczo
+  dataPrep$fbs <- ifelse(dataClean$fbs,"Tak","Nie")
+  
+  ggplot(dataPrep, aes(x=fbs)) +
+    geom_bar( width=0.8, fill="steelblue") +
+    theme_minimal() +
+    ggtitle("Poziom cukru we krwi na czczo") + 
+    labs(x="Czy poziom cukru przekraczał 120 mg/dl?", y="Liczba badanych")
+  
+  ggsave("images/barplot-fbs.png")
+  
+  # Test EKG
+  dataPrep$restecg <- recode(dataClean$restecg, "normal"="w normie", "LVH"="Przerost lewej komory", "ST abnormality"="Anomalie odcinka ST", .default="MISSING")
+  ggplot(dataPrep, aes(x=restecg)) +
+    geom_bar(width=0.8, fill="steelblue") +
+    theme_minimal() +
+    ggtitle("Wyniki EKG") + 
+    labs(x="Wynik testu EKG", y="Liczba badanych")
+  
+  ggsave("images/barplot-restecg.png")
+  
+  # Dławica wysiłkowa
+  dataPrep$exang <- ifelse(dataClean$exang,"Tak","Nie")
+  
+  ggplot(dataPrep, aes(x=exang)) +
+    geom_bar(width=0.8, fill="steelblue") +
+    theme_minimal() +
+    ggtitle("Dławica wysiłkowa wśród pacjentów") + 
+    labs(x="Wykrycie dławicy wysiłkowej", y="Liczba badanych")
+  
+  ggsave("images/barplot-exang.png")
+  
+  # Nachylenie szczytowego odcinka ST wysiłkowego
+  dataPrep$slope <- recode(dataClean$slope, "downsloping"="malejący", "flat"="płaski", "upsloping"="rosnący", .default="MISSING")
+  
+  ggplot(dataPrep, aes(x=slope)) +
+    geom_bar(width=0.8, fill="steelblue") +
+    theme_minimal() +
+    ggtitle(" Nachylenie segmentu ST podczas próby wysiłkowej") + 
+    labs(x="Poziom nachylenia", y="Liczba badanych")
+  
+  ggsave("images/barplot-slope.png")
+  
+  # Główne naczynia
+  ggplot(data, aes(x=ca)) +
+    geom_bar(width=0.8, fill="steelblue") +
+    theme_minimal() +
+    ggtitle("Liczba głównych naczyń wyróżnionych podczas koronarografii") + 
+    labs(x="Zabarwione główne naczynia - od 0 do 3", y="Liczba badanych")
+  
+  ggsave("images/barplot-ca.png")
+  
+  # Wynik scyntygrafii mięśnia sercowego
+  dataPrep$thal <- recode(dataClean$thal, "rev. defect"="defekt ustępujący", "fixed defect"="stały defekt", "normal"="brak upośledzenia", .default="MISSING")
+  ggplot(dataPrep, aes(x=thal)) +
+    geom_bar(width=0.8, fill="steelblue") +
+    theme_minimal() +
+    ggtitle("Wynik scyntygrafii mięśnia sercowego") + 
+    labs(x="Grupa wynikowa", y="Liczba badanych")
+  
+  ggsave("images/barplot-thal.png")
+  
+  # Choroba serca
+  ggplot(data, aes(x=target)) +
+    geom_bar(width=0.8, fill="steelblue") +
+    theme_minimal() +
+    ggtitle("Prawdopodobieństwo wystąpienia choroby") + 
+    labs(x="Grupa diagnozowa", y="Liczba badanych")
+  
+  ggsave("images/barplot-diag.png")
+  
+  return()
 }

@@ -1,11 +1,18 @@
 library(tidyverse)
 library(ggplot2)
+library(DataExplorer)
 
 cleanData <- function(data){
   
   dataClean <- data;
   
   # dataClean preparation
+  
+  dataClean[dataClean == "?"] <- NA
+  plot_missing(dat, theme_config=list(legend.position="none")) +
+    labs(title="Liczba brakuj¹cych wartoœci w rozbiciu na artybuty",
+         x="Atrybuty", y="Liczba brakuj¹cych wartoœci")
+  ggsave("images/missing-values.png")
   
   # Converting numerical values
   dataClean$ca <- as.numeric(dataClean$ca)

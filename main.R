@@ -10,8 +10,14 @@ source("src/plots/Scatterplot-Matrix.R")
 source("src/plots/2D-density.R")
 source("src/plots/corelationMatrix.R")
 source("src/plots/corelationPlot.R")
+source("src/plots/Boxplots.R")
+source("src/plots/CountTables.R")
 source("src/tests/normality_tests.R")
-source("src/plots/chi-square-discrete.R")
+source("src/tests/chi-square-discrete.R")
+source("src/tests/slope-oldpeak.R")
+source("src/tests/thalach-target.R")
+source("src/tests/linearCorelation.R")
+source("src/tests/descriptiveStatistics.R")
 
 # install packages:
 ## source("src/install-packages.R")
@@ -25,7 +31,7 @@ data <- read.csv(DATA_FILE)
 # Data cleaning
 dataClean <- cleanData(data)
 ## Required for Correlation Plots (text data returns errors)
-dataRClean <- roughlyCleanData(data)
+#dataRClean <- roughlyCleanData(data)
 
 # Graph generation
 
@@ -53,8 +59,20 @@ generateCorrelationPlots(dataRClean)
 # Boxplots generation
 generateBoxPlots(dataClean)
 
-# Hyphotheses testing
+# Hypotheses testing
 NormalityTests(dataClean)
+
+thalachTarget(dataClean)
+
+slopeOldpeak(dataClean)
+
+linearCorelation (dataClean)
+
+# Descriptive Statistics
+DescriptiveStatistics(dataClean)
+
+# Counts Tables generation
+generateTables(dataClean)
 
 # Chi-square test
 generateChiSqTest(dataClean)

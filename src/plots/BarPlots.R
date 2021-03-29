@@ -1,116 +1,104 @@
 library("ggplot2")
 
-generateBarPlots <- function(data)
+generateBarPlots <- function(dataClean)
 {
-  len <- length(data)
-  
-  # Wiek
-  ggplot(data, aes(x=age, y=len)) +
-    geom_bar(stat = "identity", width=0.6, fill=rgb(0.1,0.4,0.5,0.7)) +
-    geom_text(aes(label=age), vjust=3.8, color="black", size=3.0) + 
-    theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od ich wieku") + 
-    labs(x="Wiek", y="Liczba badanych") 
-  
-  # Płeć
-  ggplot(data, aes(x=sex, y=len)) +
-    geom_bar(stat = "identity", width=0.6, fill=rgb(0.1,0.4,0.5,0.7)) +
-    geom_text(aes(label=sex), vjust=1.5, color="black", size=3.0) + 
-    theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od ich płci") + 
-    labs(x="Płeć (1 = mężczyzna, 0 = kobieta)", y="Liczba badanych")
-  
-  # Ból w klatce piersiowej
-  ggplot(data, aes(x=cp, y=len)) +
-    geom_bar(stat = "identity", width=0.6, fill=rgb(0.1,0.4,0.5,0.7)) +
-    theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od typu bólu w klatce piersiowej") + 
-    labs(x="Typ bólu w klatce piersiowej", y="Liczba badanych")
-  
-  # Ciśnienie spoczynkowe krwi
-  ggplot(data, aes(x=trestbps, y=len)) +
-    geom_bar(stat = "identity", width=0.8, fill=rgb(0.1,0.4,0.5,0.7)) +
-    geom_text(aes(label=trestbps), vjust=2.8, color="black", size=2.5) + 
-    theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od ich ciśnienia spoczynkowego krwi") +
-    labs(x="Ciśnienie spoczynkowe krwi", y="Liczba badanych")
-  
-  # Cholesterol
-  ggplot(data, aes(x=chol, y=len)) +
-    geom_bar(stat = "identity", width=1.5, fill=rgb(0.1,0.4,0.5,0.7)) +
-    theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od ich stężenia cholesterolu") +
-    labs(x="Stężenie cholesterolu", y="Liczba badanych")
-  
-  # Poziom cukru we krwi na czczo
-  ggplot(data, aes(x=fbs, y=len)) +
-    geom_bar(stat = "identity", width=0.6, fill=rgb(0.1,0.4,0.5,0.7)) +
-    geom_text(aes(label=fbs), vjust=1.5, color="black", size=3.0) + 
-    theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od ich poziomu cukru we krwi na czczo") + 
-    labs(x="Poziom cukru we krwi na czczo przekraczający 120 mg/dL (1 = Tak, 0 = Nie)", y="Liczba badanych")
-  
-  # Test EKG
-  ggplot(data, aes(x=restecg, y=len)) +
-    geom_bar(stat = "identity", width=0.6, fill=rgb(0.1,0.4,0.5,0.7)) +
-    geom_text(aes(label=restecg), vjust=2.5, color="black", size=3.0) + 
-    theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od wykonania testu EKG") + 
-    labs(x="Wynik testu EKG (Wartości 0, 1, 2)", y="Liczba badanych")
-  
-  # Maksymalne tętno
-  ggplot(data, aes(x=thalach, y=len)) +
-    geom_bar(stat = "identity", width=0.9, fill=rgb(0.1,0.4,0.5,0.7)) +
-    geom_text(aes(label=thalach), vjust=8.5, color="black", size=2.0) + 
-    theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od wykrytego maksymalnego tętna") + 
-    labs(x="Maksymalne tętno", y="Liczba badanych")
-  
-  # Dławica wysiłkowa
-  ggplot(data, aes(x=exang, y=len)) +
-    geom_bar(stat = "identity", width=0.6, fill=rgb(0.1,0.4,0.5,0.7)) +
-    geom_text(aes(label=exang), vjust=2.5, color="black", size=3.0) + 
-    theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od wykrytej dławicy wysiłkowej") + 
-    labs(x="Wykrycie dławicy wysiłkowej (1 = Tak, 0 = Nie)", y="Liczba badanych")
-  
-  # Względne obniżenie rejonu ST w w czasie aktywności fizycznej
-  ggplot(data, aes(x=oldpeak, y=len)) +
-    geom_bar(stat = "identity", width=0.05, fill=rgb(0.1,0.4,0.5,0.7)) +
-    geom_text(aes(label=oldpeak), vjust=2.5, color="black", size=2.0) + 
-    theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od segmentu ST") + 
-    labs(x="Względne obniżenie rejonu ST w w czasie aktywności fizycznej", y="Liczba badanych")
-  
-  # Nachylenie szczytowego odcinka ST wysiłkowego
-  ggplot(data, aes(x=slope, y=len)) +
-    geom_bar(stat = "identity", width=0.6, fill=rgb(0.1,0.4,0.5,0.7)) +
-    geom_text(aes(label=slope), vjust=2.5, color="black", size=3.0) + 
-    theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od nachylenia szczytowego odcinka ST wysiłkowego") + 
-    labs(x="Nachylenie szczytowego odcinka ST wysiłkowego", y="Liczba badanych")
-  
-  # Główne naczynia
-  ggplot(data, aes(x=ca, y=len)) +
-    geom_bar(stat = "identity", width=0.6, fill=rgb(0.1,0.4,0.5,0.7)) +
-    theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od zabarwionych głównych naczyń") + 
-    labs(x="Zabarwionye główne naczynia (0-3)", y="Liczba badanych")
-  
-  # Gęstość thalu
-  ggplot(data, aes(x=thal, y=len)) +
-    geom_bar(stat = "identity", width=0.6, fill=rgb(0.1,0.4,0.5,0.7)) +
-    theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od thalu") + 
-    labs(x="Thal", y="Liczba badanych")
-  
-  # Choroba serca
-  ggplot(data, aes(x=target, y=len)) +
-    geom_bar(stat = "identity", width=0.6, fill=rgb(0.1,0.4,0.5,0.7)) +
-    geom_text(aes(label=target), vjust=2.5, color="black", size=3.0) +
-    theme_minimal() +
-    ggtitle("Wykres zależności liczby badanych osób od występowania choroby serca") + 
-    labs(x="Występowanie choroby serca", y="Liczba badanych")
-  
-  return()
+    # Wiek
+      ggplot(dataClean, aes(age)) +
+        geom_bar(color="black", fill="white", width = 0.8)+
+        ggtitle("Wykres zależności liczby badanych osób od ich wieku")
+      
+      ggsave("images/BarPlots_age.png")
+      
+      # Płeć
+      ggplot(dataClean, aes(sex)) +
+        geom_bar(color="black", fill="white")+
+        ggtitle("Wykres zależności liczby badanych osób od ich płci")
+      
+      ggsave("images/BarPlots_sex.png")
+      
+      # Ból w klatce piersiowej
+      ggplot(dataClean, aes(cp)) +
+        geom_bar(color="black", fill="white")+
+        ggtitle("Wykres zależności liczby badanych osób od typu bólu w klatce piersiowej")
+      
+      ggsave("images/BarPlots_cp.png")
+      
+      # Ciśnienie spoczynkowe krwi
+      ggplot(dataClean, aes(trestbps)) +
+        geom_bar(color="black", fill="white", width = 0.8)+
+        ggtitle("Wykres zależności liczby badanych osób od ich ciśnienia spoczynkowego krwi")
+      
+      ggsave("images/BarPlots_trestbps.png")
+      
+      # Cholesterol
+      ggplot(dataClean, aes(chol)) +
+        geom_bar(color="black", fill="white")+
+        ggtitle("Wykres zależności liczby badanych osób od ich stężenia cholesterolu")
+      
+      ggsave("images/BarPlots_chol.png")
+      
+      # Poziom cukru we krwi na czczo
+      ggplot(dataClean, aes(fbs)) +
+        geom_bar(color="black", fill="white")+
+        ggtitle("Wykres zależności liczby badanych osób od wykrycia danego poziomu cukru")
+      
+      ggsave("images/BarPlots_fbs.png")
+      
+      # Test EKG
+      ggplot(dataClean, aes(restecg)) +
+        geom_bar(color="black", fill="white")+
+        ggtitle("Wykres zależności liczby badanych osób od wyniku testu EKG")
+      
+      ggsave("images/BarPlots_restecg.png")
+      
+      # Maksymalne tętno
+      ggplot(dataClean, aes(thalach)) +
+        geom_bar(color="black", fill="white", width = 0.7)+
+        ggtitle("Wykres zależności liczby badanych osób od wykrytego maksymalnego tętna")
+      
+      ggsave("images/BarPlots_thalach.png")
+      
+      # Dławica wysiłkowa
+      ggplot(dataClean, aes(exang)) +
+        geom_bar(color="black", fill="white")+
+        ggtitle("Wykres zależności liczby badanych osób od wykrytej dławicy wysiłkowej")
+        
+      ggsave("images/BarPlots_exang.png")
+      
+      # Względne obniżenie rejonu ST w w czasie aktywności fizycznej
+      ggplot(dataClean, aes(oldpeak)) +
+        geom_bar(color="black", fill="white", width = 0.08)+
+        ggtitle("Wykres zależności liczby badanych osób od segmentu ST")
+      
+      ggsave("images/BarPlots_oldpeak.png")
+      
+      # Nachylenie szczytowego odcinka ST wysiłkowego
+      ggplot(dataClean, aes(slope)) +
+        geom_bar(color="black", fill="white")+
+        ggtitle("Wykres zależności liczby badanych osób od nachylenia odcinka ST wysiłkowego")
+      
+      ggsave("images/BarPlots_slope.png")
+      
+      # Główne naczynia
+      ggplot(dataClean, aes(ca)) +
+        geom_bar(color="black", fill="white")+
+        ggtitle("Wykres zależności liczby badanych osób od liczby głównych naczyń")
+      
+      ggsave("images/BarPlots_ca.png")
+      
+      # Gęstość thalu
+      ggplot(dataClean, aes(thal)) +
+        geom_bar(color="black", fill="white")+
+        ggtitle("Wykres zależności liczby badanych osób od wyniku scyntygrafii")
+      
+      ggsave("images/BarPlots_thal.png")
+      
+      # Choroba serca
+      ggplot(dataClean, aes(target)) +
+        geom_bar(color="black", fill="white")+
+        ggtitle("Wykres zależności liczby badanych osób od występowania choroby serca")
+      
+      ggsave("images/BarPlots_target.png")
+    
+    return()
 }

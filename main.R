@@ -11,6 +11,7 @@ source("src/plots/2D-density.R")
 source("src/plots/corelationMatrix.R")
 source("src/plots/corelationPlot.R")
 source("src/tests/normality_tests.R")
+source("src/plots/chi-square-discrete.R")
 
 # install packages:
 ## source("src/install-packages.R")
@@ -54,3 +55,6 @@ generateBoxPlots(dataClean)
 
 # Hyphotheses testing
 NormalityTests(dataClean)
+
+# Chi-square test
+generateChiSqTest(dataClean)

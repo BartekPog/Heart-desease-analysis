@@ -3,7 +3,7 @@ library(ggplot2)
 
 NormalityTests <- function(data)
 {
-  dataClean <- data[data$oldpeak != 0,]
+  dataChol <- data[data$oldpeak != 0,]
 
   ggqqplot(data$age)
   ggsave("images/age_QQ_plot.png")
@@ -13,7 +13,7 @@ NormalityTests <- function(data)
   ggsave("images/trestbps_QQ_plot.png")
   ggqqplot(data$thalach)
   ggsave("images/thalach_QQ_plot.png")
-  ggqqplot(dataClean$oldpeak)
+  ggqqplot(dataChol$oldpeak)
   ggsave("images/oldpeak_QQ_plot.png")
 
   sink(file = "tests/Shapiro-Wilk-normality-tests.txt")
@@ -21,6 +21,6 @@ NormalityTests <- function(data)
   shapiro.test(data$chol)
   shapiro.test(data$trestbps)
   shapiro.test(data$thalach)
-  shapiro.test(dataClean$oldpeak)
+  shapiro.test(dataChol$oldpeak)
   sink()
 }

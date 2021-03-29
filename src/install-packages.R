@@ -5,4 +5,7 @@ installPackages<- function(){
     install.packages("GGally")
     install.packages("corrplot")
     install.packages("ggpubr")
+    install.packages("DataExplorer")
+    install.packages("moments")
 }
+

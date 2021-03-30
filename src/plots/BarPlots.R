@@ -1,104 +1,142 @@
 library("ggplot2")
 
-generateBarPlots <- function(dataClean)
+generateBarPlots <- function(data)
 {
-  # Wiek
-  ggplot(dataClean, aes(age)) +
-    geom_bar(color="black", fill="steelblue", width = 0.8)+
-    ggtitle("Wykres zale¿noœci liczby badanych osób od ich wieku")+
+  
+  dataPrep <- data
+
+   # PÅ‚eÄ‡
+   dataPrep$sex <- recode(dataClean$sex, "male"="mÄ™Å¼czyzna", "female"="kobieta", .default="MISSING")
+  
+   ggplot(dataPrep, aes(x=sex)) +
+     geom_bar( width=0.8, fill="steelblue") +
+     theme_minimal() +
+     ggtitle("Wykres pÅ‚ci") + 
+     labs(x="PÅ‚eÄ‡", y="Liczba badanych")
+
+   ggsave("images/barplot-sex.png")
+
+   # BÃ³l w klatce piersiowej
+   dataPrep$cp <- recode(dataClean$cp, "typical-angina"="typowy bÃ³l stenokardialny", "atypical-angina"="atypowy bÃ³l stenokardialny", "non-anginal-pain"="bÃ³l niedÅ‚awicowy","asymptomatic"="brak bÃ³lu", .default="MISSING")
+
+   ggplot(dataPrep, aes(x=cp)) +
+     geom_bar( width=0.8, fill="steelblue") +
+     theme_minimal() +
+     ggtitle("Å¹rÃ³dÅ‚o bÃ³lu w klatce piersiowej") + 
+     labs(x="Typ bÃ³lu w klatce piersiowej", y="Liczba badanych")
+
+   ggsave("images/barplot-cp.png")
+
+   # Poziom cukru we krwi na czczo
+   dataPrep$fbs <- ifelse(dataClean$fbs,"Tak","Nie")
+
+   ggplot(dataPrep, aes(x=fbs)) +
+     geom_bar( width=0.8, fill="steelblue") +
+     theme_minimal() +
+     ggtitle("Poziom cukru we krwi na czczo") + 
+     labs(x="Czy poziom cukru przekraczaÅ‚ 120 mg/dl?", y="Liczba badanych")
+
+   ggsave("images/barplot-fbs.png")
+
+   # Test EKG
+   dataPrep$restecg <- recode(dataClean$restecg, "normal"="w normie", "LVH"="Przerost lewej komory", "ST abnormality"="Anomalie odcinka ST", .default="MISSING")
+   ggplot(dataPrep, aes(x=restecg)) +
+     geom_bar(width=0.8, fill="steelblue") +
+     theme_minimal() +
+     ggtitle("Wyniki EKG") + 
+     labs(x="Wynik testu EKG", y="Liczba badanych")
+
+   ggsave("images/barplot-restecg.png")
+
+   # DÅ‚awica wysiÅ‚kowa
+   dataPrep$exang <- ifelse(dataClean$exang,"Tak","Nie")
+
+   ggplot(dataPrep, aes(x=exang)) +
+     geom_bar(width=0.8, fill="steelblue") +
+     theme_minimal() +
+     ggtitle("DÅ‚awica wysiÅ‚kowa wÅ›rÃ³d pacjentÃ³w") + 
+     labs(x="Wykrycie dÅ‚awicy wysiÅ‚kowej", y="Liczba badanych")
+
+   ggsave("images/barplot-exang.png")
+
+   # Nachylenie szczytowego odcinka ST wysiÅ‚kowego
+   dataPrep$slope <- recode(dataClean$slope, "downsloping"="malejÄ…cy", "flat"="pÅ‚aski", "upsloping"="rosnÄ…cy", .default="MISSING")
+
+   ggplot(dataPrep, aes(x=slope)) +
+     geom_bar(width=0.8, fill="steelblue") +
+     theme_minimal() +
+     ggtitle(" Nachylenie segmentu ST podczas prÃ³by wysiÅ‚kowej") + 
+     labs(x="Poziom nachylenia", y="Liczba badanych")
+
+   ggsave("images/barplot-slope.png")
+
+   # GÅ‚Ã³wne naczynia
+   ggplot(data, aes(x=ca)) +
+     geom_bar(width=0.8, fill="steelblue") +
+     theme_minimal() +
+     ggtitle("Liczba gÅ‚Ã³wnych naczyÅ„ wyrÃ³Å¼nionych podczas koronarografii") + 
+     labs(x="Zabarwione gÅ‚Ã³wne naczynia - od 0 do 3", y="Liczba badanych")
+
+   ggsave("images/barplot-ca.png")
+
+   # Wynik scyntygrafii miÄ™Å›nia sercowego
+   dataPrep$thal <- recode(dataClean$thal, "rev. defect"="defekt ustÄ™pujÄ…cy", "fixed defect"="staÅ‚y defekt", "normal"="brak upoÅ›ledzenia", .default="MISSING")
+   ggplot(dataPrep, aes(x=thal)) +
+     geom_bar(width=0.8, fill="steelblue") +
+     theme_minimal() +
+     ggtitle("Wynik scyntygrafii miÄ™Å›nia sercowego") + 
+     labs(x="Grupa wynikowa", y="Liczba badanych")
+
+   ggsave("images/barplot-thal.png")
+
+   # Choroba serca
+   ggplot(data, aes(x=target)) +
+     geom_bar(width=0.8, fill="steelblue") +
+     theme_minimal() +
+     ggtitle("PrawdopodobieÅ„stwo wystÄ…pienia choroby") + 
+     labs(x="Grupa diagnozowa", y="Liczba badanych")
+
+   ggsave("images/barplot-diag.png")
+  
+    # Wiek
+  ggplot(data, aes(age)) +
+    geom_histogram(binwidth = 5,color="black", fill="steelblue") +
+    ggtitle("Wykres zaleÅ¼noÅ›ci liczby badanych osÃ³b od ich wieku") +
     labs(x="Wiek", y="Liczba badanych")
-  ggsave("images/BarPlots_age.png")
   
-  # P³eæ
-  ggplot(dataClean, aes(sex)) +
-    geom_bar(color="black", fill="steelblue")+
-    ggtitle("P³eæ osób badanych")+
-    labs(x="P³eæ", y="Liczba badanych")
-  ggsave("images/BarPlots_sex.png")
+  ggsave("images/histogram-age.png")
+
+    # CiÅ›nienie spoczynkowe krwi
+  ggplot(data, aes(trestbps)) +
+    geom_histogram(binwidth = 10,color="black", fill="steelblue") +
+    ggtitle("Wykres zaleÅ¼noÅ›ci liczby badanych osÃ³b od ich ciÅ›nienia spoczynkowego krwi")+
+    labs(x="Ä†isnienie spoczynkowe", y="Liczba badanych")
   
-  # Ból w klatce piersiowej
-  ggplot(dataClean, aes(cp)) +
-    geom_bar(color="black", fill="steelblue")+
-    ggtitle("ród³o bólu w klatce piersiowej")+
-    labs(x="Typ bólu w klatce piersiowej", y="Liczba badanych")
-  ggsave("images/BarPlots_cp.png")
+  ggsave("images/histogram-trestbps.png")
   
-  # Ciœnienie spoczynkowe krwi
-  ggplot(dataClean, aes(trestbps)) +
-    geom_bar(color="black", fill="steelblue", width = 0.8)+
-    ggtitle("Wykres zale¿noœci liczby badanych osób od ich ciœnienia spoczynkowego krwi")+
-    labs(x="Ciœnienie spoczynkowe krwi", y="Liczba badanych")
-  ggsave("images/BarPlots_trestbps.png")
+    ggplot(data, aes(chol)) +
+    geom_histogram(binwidth = 30,color="black", fill="steelblue") +
+    ggtitle("Wykres zaleÅ¼noÅ›ci liczby badanych osÃ³b od ich stÄ™Å¼enia cholesterolu")+
+    labs(x="Cholesterol", y="Liczba badanych")
   
-  # Cholesterol
-  ggplot(dataClean, aes(chol)) +
-    geom_bar(color="black", fill="steelblue")+
-    ggtitle("Wykres zale¿noœci liczby badanych osób od ich stê¿enia cholesterolu")+
-    labs(x="Stê¿enie cholesterolu", y="Liczba badanych")
-  ggsave("images/BarPlots_chol.png")
+  ggsave("images/histogram-chol.png")
   
-  # Poziom cukru we krwi na czczo
-  ggplot(dataClean, aes(fbs)) +
-    geom_bar(color="black", fill="steelblue")+
-    ggtitle("Poziom cukru we krwi na czczo")+
-    labs(x="Czy poziom cukru przekracza³ 120 mg/dl?", y="Liczba badanych")
-  ggsave("images/BarPlots_fbs.png")
+    # Maksymalne tÄ™tno
+  ggplot(data, aes(thalach)) +
+    geom_histogram(binwidth = 20,color="black", fill="steelblue") +
+    ggtitle("Wykres zaleÅ¼noÅ›ci liczby badanych osÃ³b od wykrytego maksymalnego tÄ™tna")+
+    labs(x="Maksymalne tÄ™tno", y="Liczba badanych")
   
-  # Test EKG
-  ggplot(dataClean, aes(restecg)) +
-    geom_bar(color="black", fill="steelblue")+
-    ggtitle("Wynik EKG")+
-    labs(x="Wynik testu EKG", y="Liczba badanych")
-  ggsave("images/BarPlots_restecg.png")
+  ggsave("images/histogram-thalach.png")
   
-  # Maksymalne têtno
-  ggplot(dataClean, aes(thalach)) +
-    geom_bar(color="black", fill="steelblue", width = 0.7)+
-    ggtitle("Wykres zale¿noœci liczby badanych osób od wykrytego maksymalnego têtna")+
-    labs(x="Maksymalne têtno", y="Liczba badanych")
-  ggsave("images/BarPlots_thalach.png")
+    # WzglÄ™dne obniÅ¼enie odcinka ST w w czasie aktywnoÅ›ci fizycznej
+  ggplot(data, aes(oldpeak)) +
+    geom_histogram(binwidth = 0.75,color="black", fill="steelblue") +
+    ggtitle("Wykres zaleÅ¼noÅ›ci liczby badanych osÃ³b od odcinka ST")+
+    labs(x="Odcinek ST", y="Liczba badanych")
   
-  # D³awica wysi³kowa
-  ggplot(dataClean, aes(exang)) +
-    geom_bar(color="black", fill="steelblue")+
-    ggtitle("D³awica wysi³kowa wœród pacjentów")+
-    labs(x="Wykrycie d³awicy wysi³kowej", y="Liczba badanych")
-  ggsave("images/BarPlots_exang.png")
+  ggsave("images/histogram-oldpeak.png")
   
-  # Wzglêdne obni¿enie rejonu ST w w czasie aktywnoœci fizycznej
-  ggplot(dataClean, aes(oldpeak)) +
-    geom_bar(color="black", fill="steelblue", width = 0.08)+
-    ggtitle("Wykres zale¿noœci liczby badanych osób od segmentu ST")+
-    labs(x="Obni¿enie rejonu ST", y="Liczba badanych")
-  ggsave("images/BarPlots_oldpeak.png")
-  
-  # Nachylenie szczytowego odcinka ST wysi³kowego
-  ggplot(dataClean, aes(slope)) +
-    geom_bar(color="black", fill="steelblue")+
-    ggtitle("Nachylenie segmentu ST podczas próby wysi³kowej")+
-    labs(x="Poziom nachylenia", y="Liczba badanych")
-  ggsave("images/BarPlots_slope.png")
-  
-  # G³ówne naczynia
-  ggplot(dataClean, aes(ca)) +
-    geom_bar(color="black", fill="steelblue")+
-    ggtitle("Liczba g³ównych naczyñ wyró¿nionych w koronarografii")+
-    labs(x="Zabarwione g³ówne naczynia - od 0 do 3", y="Liczba badanych")
-  ggsave("images/BarPlots_ca.png")
-  
-  # Gêstoœæ thalu
-  ggplot(dataClean, aes(thal)) +
-    geom_bar(color="black", fill="steelblue")+
-    ggtitle("Wynik scyntygrafii miêsienia sercowego")+
-    labs(x="Grupa wynikowa", y="Liczba badanych")
-  ggsave("images/BarPlots_thal.png")
-  
-  # Choroba serca
-  ggplot(dataClean, aes(target)) +
-    geom_bar(color="black", fill="steelblue")+
-    ggtitle("Prawdopodobieñstwo wyst¹pienia choroby")+
-    labs(x="Grupa diagnozowa", y="Liczba badanych")
-  ggsave("images/BarPlots_target.png")
   
   return()
 }

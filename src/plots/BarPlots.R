@@ -137,6 +137,4 @@ generateBarPlots <- function(data)
   
   ggsave("images/histogram-oldpeak.png")
   
-  
-  return()
 }

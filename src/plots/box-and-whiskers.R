@@ -58,5 +58,4 @@ generateBoxAndWhiskers <- function(data){
     labs(y="Względne obniżenie rejonu ST")
   
   ggsave("images/boxplot-oldpeak.png")
-  return()
 }

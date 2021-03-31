@@ -17,10 +17,12 @@ NormalityTests <- function(data)
   ggsave("images/oldpeak_QQ_plot.png")
 
   sink(file = "tests/Shapiro-Wilk-normality-tests.txt")
-  shapiro.test(data$age)
-  shapiro.test(data$chol)
-  shapiro.test(data$trestbps)
-  shapiro.test(data$thalach)
-  shapiro.test(dataChol$oldpeak)
   sink()
+
+  capture.output( shapiro.test(data$age), file="tests/Shapiro-Wilk-normality-tests.txt", append=TRUE)
+  capture.output( shapiro.test(data$chol), file="tests/Shapiro-Wilk-normality-tests.txt", append=TRUE)
+  capture.output( shapiro.test(data$trestbps), file="tests/Shapiro-Wilk-normality-tests.txt", append=TRUE)
+  capture.output( shapiro.test(data$thalach), file="tests/Shapiro-Wilk-normality-tests.txt", append=TRUE)
+  capture.output( shapiro.test(data$oldpeak), file="tests/Shapiro-Wilk-normality-tests.txt", append=TRUE)
+
 }

@@ -10,8 +10,8 @@ cleanData <- function(data){
   
   dataClean[dataClean == "?"] <- NA
   plot_missing(dataClean, theme_config=list(legend.position="none")) +
-    labs(title="Liczba brakuj�cych warto�ci w rozbiciu na artybuty",
-         x="Atrybuty", y="Liczba brakuj�cych warto�ci")
+    labs(title="Liczba brakuj¹cych wartoœci w rozbiciu na artybuty",
+         x="Atrybuty", y="Liczba brakuj¹cych wartoœci")
   ggsave("images/missing-values.png")
   
   # Converting numerical values

@@ -9,9 +9,9 @@ cleanData <- function(data){
   # dataClean preparation
   
   dataClean[dataClean == "?"] <- NA
-  plot_missing(dat, theme_config=list(legend.position="none")) +
-    labs(title="Liczba brakuj¹cych wartoœci w rozbiciu na artybuty",
-         x="Atrybuty", y="Liczba brakuj¹cych wartoœci")
+  plot_missing(dataClean, theme_config=list(legend.position="none")) +
+    labs(title="Liczba brakujï¿½cych wartoï¿½ci w rozbiciu na artybuty",
+         x="Atrybuty", y="Liczba brakujï¿½cych wartoï¿½ci")
   ggsave("images/missing-values.png")
   
   # Converting numerical values
@@ -56,31 +56,26 @@ cleanData <- function(data){
   
   # For compatibility
   colnames(dataClean)[14] <- "target"
-  
-  # Removing oultier values which do not lay in the (q0.25 - 1,5IQR; q0,75 + 1,5IQR) range
-  #dataClean <- data[!(data$chol %in% boxplot.stats(data$chol)$out),]
-  #dataClean <- dataClean[!(dataClean$thalach %in% boxplot.stats(dataClean$thalach)$out),]
-  #dataClean <- dataClean[!(dataClean$oldpeak %in% boxplot.stats(dataClean$oldpeak)$out),]
-  #dataClean <- dataClean[!(dataClean$trestbps %in% boxplot.stats(dataClean$trestbps)$out),]
+
   return(dataClean)
 }
 
 roughlyCleanData <- function(data){
-  
+  dataC <- data;
+  dataC[dataC == "?"] <- NA
   # Data preparation
-  #names(data)[1] <- "age"
-  data$ca <- as.numeric(data$ca)
-  
-  data$thal <- as.numeric(data$thal)
+  dataC$ca <- as.numeric(dataC$ca)
+  dataC$thal <- as.numeric(dataC$thal)
   # missing values
-  sapply(data, function(x) sum(is.na(x)))
+  sapply(dataC, function(x) sum(is.na(x)))
+  dataClean <- na.omit(dataClean);
+  # Removing oultier values which do not lay in the (q0.5 - 3 * MAD, q0.5 + 3 * MAD) range
+  dataC <- dataC[(dataC$trestbps >= median(dataC$trestbps) - 3 * mad(dataC$trestbps)) & (dataC$trestbps <= median(dataC$trestbps) + 3 * mad(dataC$trestbps)),]
+  dataC <- dataC[(dataC$chol >= median(dataC$chol) - 3 * mad(dataC$chol)) & (dataC$chol <= median(dataC$chol) + 3 * mad(dataC$chol)),]
+  dataC <- dataC[(dataC$thalach >= median(dataC$thalach) - 3 * mad(dataC$thalach)) & (dataC$thalach <= median(dataC$thalach) + 3 * mad(dataC$thalach)),]
+  dataC <- dataC[(dataC$oldpeak >= median(dataC$oldpeak) - 3 * mad(dataC$oldpeak)) & (dataC$oldpeak <= median(dataC$oldpeak) + 3 * mad(dataC$oldpeak)),]
   
-  # Removing oultier values which do not lay in the (q0.25 - 1,5IQR; q0,75 + 1,5IQR) range
-  dataClean <- data[!(data$chol %in% boxplot.stats(data$chol)$out),]
-  dataClean <- dataClean[!(dataClean$thalach %in% boxplot.stats(dataClean$thalach)$out),]
-  dataClean <- dataClean[!(dataClean$oldpeak %in% boxplot.stats(dataClean$oldpeak)$out),]
-  dataClean <- dataClean[!(dataClean$trestbps %in% boxplot.stats(dataClean$trestbps)$out),]
-  return(dataClean)
+  return(dataC)
 }
 
 
